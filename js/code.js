@@ -1,23 +1,23 @@
 // REUSABLES
 // 1. generic html element maker
-function elementMaker(elementType, elementText = '', elementClass = '', attrs = null) {
+function elementMaker(elementType, elementText = '', elementClass = '') {
   if (!elementType) throw "Missing element type parameter!";
   try {
     let element = document.createElement(elementType);
     if (elementText) element.textContent = elementText;
     if (elementClass) element.classList.add(elementClass);
-    if (attrs) {
-      for (let property in attrs) {
-        element.setAttribute(property, attrs[property]);
-      }
+    // if (attrs) {
+    //   for (let property in attrs) {
+    //     element.setAttribute(property, attrs[property]);
+    //   }
       // Object.entries(attrs).forEach((key, value) => {
       //   element.setAttribute(key, value)
       // });
-    }
+    // }
     return element;
   }
   catch(e) {
-    throw "Invalid element type!";
+    throw "Invalid element type! : " + e;
   } 
 }
 
