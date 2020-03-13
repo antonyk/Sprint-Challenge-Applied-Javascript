@@ -51,7 +51,7 @@ function createCard(data) {
   //   )
   // );
 
-  console.log(card);
+  // console.log(card);
   return card;
 }
 
