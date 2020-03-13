@@ -17,3 +17,78 @@
 // </div>
 //
 // Create a card for each of the articles and add the card to the DOM.
+
+
+function createCard(data) {
+
+  // console.log(data);
+  // let card = elementMaker('div', '', 'card');
+  // let headlineEl= elementMaker('div', data['headline'], 'headline');
+  // let authorEl = elementMaker('div', '', 'author');
+  // let imgContEl = elementMaker('div', '', 'img-container');
+  // let imgEl = elementMaker('img', '', '', {'src': data['authorPhoto']});
+  // let authNameEl = elementMaker('span', `By ${data['authorName']}`);
+
+  let card = elementMaker('div', '', 'card');
+  let headlineEl= elementMaker('div', data.headline, 'headline');
+  let authorEl = elementMaker('div', '', 'author');
+  let imgContEl = elementMaker('div', '', 'img-container');
+  let imgEl = elementMaker('img', '', '');
+  imgEl.src = data.authorPhoto;
+  let authNameEl = elementMaker('span', `By ${data.authorName}`);
+
+  card.append(headlineEl, authorEl);
+  authorEl.append(imgContEl, authNameEl);
+  imgContEl.append(imgEl);
+
+  // return elementMaker('div', '', 'card').append(
+  //   elementMaker('div', data.headline, 'headline'),
+  //   elementMaker('div', '', 'author').append(
+  //     elementMaker('div', '', 'img-container').append('',
+  //       // elementMaker('img', '', '', {src: data.authorPhoto})
+  //     ),
+  //     elementMaker('span', `By ${data.authorName}`)
+  //   )
+  // );
+
+  // console.log(card);
+  return card;
+}
+
+let test = null;
+
+function Cards() {
+
+  lambdaApi.get('/articles')
+  .then(res => {
+    let target = document.querySelector('.cards-container');
+
+    // console.log(res);
+    test = res;
+    Object.values(res.data.articles).forEach(item => {
+
+      item.forEach(item => {
+        // console.log(item);
+        target.append(createCard(item))
+      });
+
+    });
+
+  });
+
+}
+
+
+let target = document.querySelector('.cards-container');
+
+let data1 = {
+  "headline": "ES8: The Next Step in the Evolution of Javascript and What it Means For Your Projects",
+  "authorPhoto": "./assets/sir.jpg",
+  "authorName": "SIR RUFF'N'STUFF"
+}
+
+// console.log(data1);
+
+// target.append(createCard(data1));
+
+Cards();

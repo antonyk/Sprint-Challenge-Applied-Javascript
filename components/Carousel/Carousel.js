@@ -17,3 +17,96 @@
     <div class="right-button"> > </div>
   </div>
 */
+
+const images = [
+  "./assets/carousel/mountains.jpeg",
+  "./assets/carousel/computer.jpeg",
+  "./assets/carousel/trees.jpeg",
+  "./assets/carousel/turntable.jpeg"
+];
+
+
+
+function createCarousel() {
+
+  let result = elementMaker('div', '', 'carousel');
+  result.id = 0;
+  // let index = elementMaker('div', '0', '');
+  // index.id = 'carouselIndex';
+  // index.hidden = true;
+
+  let leftBtn = elementMaker('div', ' < ', 'left-button');
+  result.append(leftBtn);
+  leftBtn.addEventListener('click', e => {
+    let ctarget = document.querySelector('.carousel');
+
+    let idx = parseInt(ctarget.id);
+    let itargetCur = document.getElementById("carousel-img-"+idx);
+    itargetCur.style.display = 'none';
+
+    idx === 0 ? idx = images.length-1 : idx--;
+    let itargetNext = document.getElementById("carousel-img-"+idx);
+    itargetNext.style.display = 'inline-block';
+
+    ctarget.id = idx;
+
+    // let target = document.querySelector('.carousel img');
+    // let idx = parseInt(document.getElementById('#carouselIndex').innerText);
+    // idx === 0 ? idx = images.length-1 : idx--;
+    // target.src = images[idx];
+  })
+
+  let imgElements = [];
+  let imgEl = null;
+  for (let i = 0; i < images.length; i++) {
+    imgEl = elementMaker('img');
+    imgEl.src = images[i];
+    imgEl.id = "carousel-img-"+i;
+    imgElements.push(imgEl);
+    result.append(imgEl);
+  }
+  if (imgElements.length > 0) {
+  // enable the first image to show up
+    imgElements[0].style.display = 'inline-block';
+  }
+ 
+  // let img = elementMaker('img');
+  // img.src = images[0];
+  // img.style.display = "inline-block";
+  // result.append(img);
+
+  let rightBtn = elementMaker('div', ' > ', 'right-button');
+  result.append(rightBtn);
+  rightBtn.addEventListener('click', e => {
+
+    let ctarget = document.querySelector('.carousel');
+
+    let idx = parseInt(ctarget.id);
+    let itargetCur = document.getElementById("carousel-img-"+idx);
+    itargetCur.style.display = 'none';
+
+    idx === images.length-1 ? idx = 0 : idx++;
+    let itargetNext = document.getElementById("carousel-img-"+idx);
+    itargetNext.style.display = 'inline-block';
+
+    ctarget.id = idx;
+
+
+    // let target = document.querySelector('.carousel img');
+    // let idx = parseInt(document.querySelector('#carouselIndex').innerText);
+    // idx === images.length-1 ? idx = 0 : idx++;
+    // target.src = images[idx];
+  })
+  
+
+  // images.forEach(item => {
+  //   let img = elementMaker('img');
+  //   img.src = item;
+  //   result.append(img);
+  // });
+
+
+  return result;
+}
+
+document.querySelector('.carousel-container').append(createCarousel());
