@@ -7,3 +7,27 @@
 //
 //  The tab component should look like this:
 //    <div class="tab">topic here</div>
+
+
+
+function createTab(topic) {
+  return elementMaker('div', topic, 'tab');
+}
+
+
+function Tabs() {
+
+  lambdaApi.get('/topics')
+  .then(res => {
+
+    let target = document.querySelector('.topics');
+
+    res.data.topics.forEach(item => {
+      target.append(createTab(item));
+    });
+
+  });
+
+}
+
+Tabs();
