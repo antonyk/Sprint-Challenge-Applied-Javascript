@@ -12,7 +12,7 @@
     <div class="left-button"> < </div>
     <img src="./assets/carousel/mountains.jpeg" />
     <img src="./assets/carousel/computer.jpeg" />
-    <img src="./assets/carousel/computer.jpeg" />
+    <img src="./assets/carousel/trees.jpeg" />
     <img src="./assets/carousel/turntable.jpeg" />
     <div class="right-button"> > </div>
   </div>
@@ -21,7 +21,7 @@
 const images = [
   "./assets/carousel/mountains.jpeg",
   "./assets/carousel/computer.jpeg",
-  "./assets/carousel/computer.jpeg",
+  "./assets/carousel/trees.jpeg",
   "./assets/carousel/turntable.jpeg"
 ];
 
@@ -46,7 +46,7 @@ function createCarousel() {
 
     idx === 0 ? idx = images.length-1 : idx--;
     let itargetNext = document.getElementById("carousel-img-"+idx);
-    itargetCur.style.display = 'inline-block';
+    itargetNext.style.display = 'inline-block';
 
     ctarget.id = idx;
 
@@ -56,17 +56,18 @@ function createCarousel() {
     // target.src = images[idx];
   })
 
-  let imgs = [];
+  let imgElements = [];
+  let imgEl = null;
   for (let i = 0; i < images.length; i++) {
-    img = elementMaker('img');
-    img.src = images[i];
-    img.id = "carousel-img-"+i;
-    imgs.push(img);
-    result.append(img);
+    imgEl = elementMaker('img');
+    imgEl.src = images[i];
+    imgEl.id = "carousel-img-"+i;
+    imgElements.push(imgEl);
+    result.append(imgEl);
   }
-  if (imgs.length > 0) {
+  if (imgElements.length > 0) {
   // enable the first image to show up
-    imgs[0].style.display = 'inline-block';
+    imgElements[0].style.display = 'inline-block';
   }
  
   // let img = elementMaker('img');
@@ -86,7 +87,7 @@ function createCarousel() {
 
     idx === images.length-1 ? idx = 0 : idx++;
     let itargetNext = document.getElementById("carousel-img-"+idx);
-    itargetCur.style.display = 'inline-block';
+    itargetNext.style.display = 'inline-block';
 
     ctarget.id = idx;
 
